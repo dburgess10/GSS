@@ -1,6 +1,6 @@
 ---
 title: "Social Survey 2010"
-author: "Put your name here!"
+author: "Dulce Burgess"
 date: "Fall 2018"
 output:
   html_document:
@@ -23,6 +23,8 @@ Use the data from the 2010 general social survey to explore whether belief in co
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
+The data for the General Social Survey is large, having 2044 observations of 790 variables. Rather than looking at all the variables, we will be focusing on race, condrift, and capital punishment. TO do so, we will be analyzing the data through bar charts and tables.
+
 #Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
@@ -42,11 +44,24 @@ alldata <- read.csv(file="gss2010.csv", header=TRUE)
 ```{r}
 barchartGC(~race+condrift, data=alldata, type = "percent") 
 ```
-fhdsfhgfsdl
+After viewing the data graphically, It appears that white and other believe in continental drift more than black.Black are more likely to not believe in continental drift in comparison to other and white.  
 
 ```{r}
 barchartGC(~race+cappun, data=alldata, type = "percent") 
 ```
+
+Viewing the data, it appears that the white are more in favor of capital punishment than the black and other. with that being said, the blacks are highly opposed of capital punishment.   
+
+```{r}
+barchartGC(~condrift+cappun, data=alldata, type = "percent") 
+```
+
+After viewing the data, it is evident that both groups of those who believe that continental drift is true and false are highly in favor of capital punishment.  
+
+
+### Numerical Descriptive Results
+
+<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
 ```{r}
 tab = xtabs(~race+cappun, data=alldata)
@@ -54,6 +69,10 @@ rowPerc(tab)
 colPerc(tab)
 ```
 
+Of those in the BLACK group, 46.79% are in favor and 53.21% oppose.  
+Of those in the OTHER group, 56.47% are in favor and 43.53% oppose.  
+Of those in the WHITE group, 72.74% are in favor and 27.26% oppose.  
+After viewing the data numerically, It appears that for both black and Other, are more opposed   of capital punishment. For WHite, more appear to favor in capital punishment.  
 
 ```{r}
 tab = xtabs(~race+condrift, data=alldata)
@@ -61,9 +80,11 @@ rowPerc(tab)
 colPerc(tab)
 ```
 
-```{r}
-barchartGC(~condrift+cappun, data=alldata, type = "percent") 
-```
+Of those in the BLACK group, 23.30% dont believe and 76.70% beleive in continental drift.  
+Of those in the OTHER group, 9.46% dont believe and 90.54% believe in continental drift.  
+Of those in the WHITE group, 8.42% dont believe and 91.58 believe in continental drift.
+After viewing the data graphically, It appears that white and other believe in continental drift more than black. Black are more likely to not believe in continental drift in comparison to   other andb white.  
+ 
  
 ```{r}
 tab = xtabs(~condrift+cappun, data=alldata)
@@ -71,10 +92,10 @@ rowPerc(tab)
 colPerc(tab) 
 ```
  
-### Numerical Descriptive Results
-
-<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
-
+ Of those in the FALSE group, 65.48% are in favor and 34.52% oppose capital drift.
+ Of those in the TRUE group, 67.57% are in favor and 32.43% oppose capital drift.
+ After viewing the data, it is evident that both groups of those who believe that continental drift is true and false are highly in favor of capital punishment.
+ 
 
 ## Inferential Results
 
@@ -84,7 +105,21 @@ colPerc(tab)
 chisqtestGC(~race+condrift, data=alldata, graph=TRUE)
 ```
 
+Our P-Value is 0. The chances of getting such a result are infinitesimally small if the null hypothesis is true. We therefore choose to reject the null hypothesis. So it appears that race  and belief in the continental drift are related
+```{r}
+chisqtestGC(~race+cappun, data=alldata, graph=TRUE)
+```
+
+Our P-Value is 0. The chances of getting such a result are infinitesimally small if the null hypothesis is true. We therefore choose to reject the null hypothesis. So it appears that race and belief in the capital punishment are related.
+
+```{r}
+chisqtestGC(~condrift+cappun, data=alldata, graph=TRUE)
+```
+
+Our P-Value is 0.7919. This means the probability of getting a sample like this under conditions when the null hypothesis is true, is about 1 in 100. This is below our threshold of belief. Since the P-Value is too low, we wiil reject the null and conclude that there is a relationship.
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+
+After viewing the results graphically, numerically, and running chi-square tests on the data, we can conclude that there is a relationship between race and continental drift, race and capital punishment, and belief in continental drift and capital drift
